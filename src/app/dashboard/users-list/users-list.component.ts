@@ -10,17 +10,30 @@ import { UsersService } from '../state/users.service';
   styleUrls: ['./users-list.component.scss'],
 })
 export class UsersListComponent implements OnInit {
-  $users: Observable<User[]>;
+  users$: Observable<User[]>;
+  usersCount$: Observable<number>;
+  activeUsersCount$: Observable<number>;
 
   constructor(
     private usersQuery: UsersQuery,
     private usersService: UsersService
   ) {
-    this.$users = this.usersQuery.selectAll();
-    this.$users.subscribe(users => console.log(users, 'aaaa'));
+    this.users$ = this.usersQuery.selectAll();
+    this.usersCount$ = this.usersQuery.selectCount();
+    this.activeUsersCount$ = this.usersQuery.selectCount(
+      ({ active }) => active
+    );
+
+    this.users$.subscribe(users => console.log(users, 'aaaa'));
   }
 
   ngOnInit() {
     this.usersService.get();
   }
+
+  onUserActiveToggled(user: User) {
+    this.usersService.update(user.id, { active: !user.active });
+  }
+
+  addUser() {}
 }
