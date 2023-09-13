@@ -20,12 +20,12 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-    "@datorama/akita": "^7.1.1",
+    "@datorama/akita": "^8.0.1",
     "bluebird": "^3.7.2",
     "primeflex": "^3.3.1",
     "primeng": "^16.3.1",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
+    "tslib": "2.4.1",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
