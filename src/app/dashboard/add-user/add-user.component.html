@@ -1,0 +1,36 @@
+<form [formGroup]="addUserform" class="formgrid grid row-gap-3">
+  <div class="col-3 flex align-items-center">Name</div>
+  <div class="col-9 relative">
+    <input class="w-full" type="text" pInputText formControlName="name" />
+    <p-progressSpinner
+      *ngIf="addUserform.get('name')?.pending"
+      class="uniqe-name-spinner"
+      styleClass="w-2rem h-2rem"></p-progressSpinner>
+    <span
+      *ngIf="
+        addUserform.get('name')?.hasError('required') &&
+        addUserform.get('name')?.dirty
+      "
+      class="error-msg"
+      >Required</span
+    >
+    <span
+      *ngIf="addUserform.get('name')?.hasError('usernameAlreadyExists')"
+      class="error-msg"
+      >User name already <strong>exists</strong></span
+    >
+  </div>
+  <div class="col-3 flex align-items-center">Active</div>
+  <div class="col-9">
+    <p-inputSwitch formControlName="active"></p-inputSwitch>
+  </div>
+</form>
+
+<div class="flex justify-content-end my-2">
+  <p-button
+    label="Add"
+    (onClick)="addUser()"
+    [disabled]="
+      addUserform.invalid || addUserform.get('name')?.pending
+    "></p-button>
+</div>
